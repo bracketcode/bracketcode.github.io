@@ -35,10 +35,9 @@ function showLoadingWindow(msg, title) {
                 }
             },
             style: {
-                classes: 'qtip-shadow qtip-bootstrap'
+                classes: 'qtip-dark qtip-shadow'
             },
             hide: false,
-            style: 'dialogue',
             events: {
                 render: function(event, api) {
                     $('button', api.elements.content).click(function(e) {
