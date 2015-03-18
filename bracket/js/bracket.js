@@ -87,7 +87,7 @@ function populateBracket() {
 
 
 function showBracket() {
-    setTimeout(hideLoadingWindow, 1000);
+    hideLoadingWindow();
     $( ".slot" ).animate({
         opacity: "1",
       }, 1000, function() {});
