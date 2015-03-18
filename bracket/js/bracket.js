@@ -13,7 +13,8 @@ function loadBracketData() {
         bracket = jsyaml.load(yaml_data);
         console.log(yaml_data);
         console.log("Bracket loaded!")
-        populateBracket();
+        //populateBracket();
+        showBracket(); // remove after debug
     });
 }
 
