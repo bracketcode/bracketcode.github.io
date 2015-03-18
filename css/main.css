@@ -4,7 +4,8 @@
    Author's custom styles
    ========================================================================== */
 
-/* This gets Facebook to fall into place */
+/* This gets all the buttons to fall into place...
+ * ...this took 9 commits to get right... */
 .social, .social span {
     line-height: 20px;
 }
