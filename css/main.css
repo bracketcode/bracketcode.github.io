@@ -10,7 +10,15 @@
     line-height: 20px;
 }
 
-
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url(../img/header-dark.png);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.1em;
+}
 
 
 
