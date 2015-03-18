@@ -4,9 +4,8 @@
    Author's custom styles
    ========================================================================== */
 
-.fb-like {
-    position: relative;
-    top: -5px; // vertically center FB like/share
+.fb-like.fb_iframe_widget span{
+  vertical-align: top !important;
 }
 
 /* This gets Facebook to fall into place */
