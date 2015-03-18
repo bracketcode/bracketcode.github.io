@@ -5,8 +5,8 @@
    ========================================================================== */
 
 /* This gets Facebook to fall into place */
-.social {
-    line-height: 10px;
+.social, .social span {
+    line-height: 20px;
 }
 
 
