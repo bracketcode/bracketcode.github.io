@@ -4,13 +4,21 @@
    Author's custom styles
    ========================================================================== */
 
-.fb-like{
+.fb-like {
     position: relative;
     top: 15px; // vertically center FB like/share
 }
 
+/* This gets Facebook to fall into place */
+.social iframe {
+    position: relative;
+    top: 10px;
+}
 
-
+.google {
+    position: relative;
+    top: 12px;
+}
 
 
 
