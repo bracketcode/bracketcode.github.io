@@ -1,4 +1,9 @@
 lineup:
+  shortcodes:
+    Midwest: mw
+    West: w
+    East: e
+    South: s
   regions:
     - Midwest:
       - pair1:
@@ -39,7 +44,7 @@ lineup:
       - pair8:
         - team: Kansas
           seed: 2
-        - team: New Mexico St.
+        - team: New Mex. St.
           seed: 15
     - West:
       - pair1:
@@ -80,7 +85,7 @@ lineup:
       - pair8:
         - team: Arizona
           seed: 2
-        - team: Texas Southern
+        - team: TX Southern
           seed: 15
     - East:
       - pair1:
@@ -106,7 +111,7 @@ lineup:
       - pair5:
         - team: Providence
           seed: 6
-        - team: Boise St./Dayton
+        - team: Boise St./Day.
           seed: 11
       - pair6:
         - team: Olklahoma
@@ -130,14 +135,14 @@ lineup:
         - team: UNF/RMU
           seed: 16
       - pair2:
-        - team: San Diego State
+        - team: San Diego St.
           seed: 8
         - team: St. John's
           seed: 9
       - pair3:
         - team: Utah
           seed: 5
-        - team: Steph. F. Austin
+        - team: S. F. Austin
           seed: 12
       - pair4:
         - team: Georgetown
@@ -162,5 +167,5 @@ lineup:
       - pair8:
         - team: Gonzaga
           seed: 2
-        - team: North Dakota St.
+        - team: North Dak. St.
           seed: 15
