@@ -1,0 +1,166 @@
+lineup:
+  regions:
+    - Midwest:
+      - pair1:
+        - team: Wisconsin
+          seed: 1
+        - team: Hampton
+          seed: 16
+      - pair2:
+        - team: Cincinnati
+          seed: 8
+        - team: Purdue
+          seed: 9
+      - pair3:
+        - team: West Virginia
+          seed: 5
+        - team: Buffalo
+          seed: 12
+      - pair4:
+        - team: Maryland
+          seed: 4
+        - team: Valparaiso
+          seed: 13
+      - pair5:
+        - team: Butler
+          seed: 6
+        - team: Texas
+          seed: 11
+      - pair6:
+        - team: Notre Dame
+          seed: 3
+        - team: Northeastern
+          seed: 14
+      - pair7:
+        - team: Wichita State
+          seed: 7
+        - team: Indiana
+          seed: 10
+      - pair8:
+        - team: Kansas
+          seed: 2
+        - team: New Mexico St.
+          seed: 15
+    - West:
+      - pair1:
+        - team: Kentucky
+          seed: 1
+        - team: Coastal Caro.
+          seed: 16
+      - pair2:
+        - team: Oregon
+          seed: 8
+        - team: Olkahoma State
+          seed: 9
+      - pair3:
+        - team: Arkansas
+          seed: 5
+        - team: Wofford
+          seed: 12
+      - pair4:
+        - team: North Carolina
+          seed: 4
+        - team: Harvard
+          seed: 13
+      - pair5:
+        - team: Xavier
+          seed: 6
+        - team: Mississippi
+          seed: 11
+      - pair6:
+        - team: Baylor
+          seed: 3
+        - team: Georgia State
+          seed: 14
+      - pair7:
+        - team: VCU
+          seed: 7
+        - team: Ohio State
+          seed: 10
+      - pair8:
+        - team: Arizona
+          seed: 2
+        - team: Texas Southern
+          seed: 15
+    - East:
+      - pair1:
+        - team: Villanova
+          seed: 1
+        - team: Lafayette
+          seed: 16
+      - pair2:
+        - team: NC State
+          seed: 8
+        - team: LSU
+          seed: 9
+      - pair3:
+        - team: UNI
+          seed: 5
+        - team: Wyoming
+          seed: 12
+      - pair4:
+        - team: Louisville
+          seed: 4
+        - team: UC Irvine
+          seed: 13
+      - pair5:
+        - team: Providence
+          seed: 6
+        - team: Boise St./Dayton
+          seed: 11
+      - pair6:
+        - team: Olklahoma
+          seed: 3
+        - team: Albany
+          seed: 14
+      - pair7:
+        - team: Michigan State
+          seed: 7
+        - team: Georgia
+          seed: 10
+      - pair8:
+        - team: Virginia
+          seed: 2
+        - team: Belmont
+          seed: 15
+    - South:
+      - pair1:
+        - team: Duke
+          seed: 1
+        - team: UNF/RMU
+          seed: 16
+      - pair2:
+        - team: San Diego State
+          seed: 8
+        - team: St. John's
+          seed: 9
+      - pair3:
+        - team: Utah
+          seed: 5
+        - team: Steph. F. Austin
+          seed: 12
+      - pair4:
+        - team: Georgetown
+          seed: 4
+        - team: Eastern Wash.
+          seed: 13
+      - pair5:
+        - team: SMU
+          seed: 6
+        - team: UCLA
+          seed: 11
+      - pair6:
+        - team: Iowa State
+          seed: 3
+        - team: UAB
+          seed: 14
+      - pair7:
+        - team: Iowa
+          seed: 7
+        - team: Davidson
+          seed: 10
+      - pair8:
+        - team: Gonzaga
+          seed: 2
+        - team: North Dakota St.
+          seed: 15
