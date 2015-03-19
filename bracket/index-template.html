@@ -1,0 +1,864 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Create a New Bracket - BracketCode</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta property="og:title" content="BracketCode - Make and Share Your Bracket" />
+        <meta property="og:site_name" content="BracketCode" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://bracketcode.github.io/" />
+        <meta property="og:image" content="https://bracketcode.github.io/img/header.png" />
+        <meta property="og:description" content="Ready to join the MADNESS? Fill out your bracket today and share it easily with friends, family, and people around the world!" />
+        <meta property="fb:app_id" content="462522140575433" />
+        <meta property="fb:admins" content="1056456808" />
+        
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="../css/bootstrap-theme.css">
+        <link rel="stylesheet" href="../css/main.css">
+        
+        <link rel="stylesheet" href="css/bracket.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.css">
+
+        <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body class="bracket standings light-blue">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Begin Facebook SDK -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <!-- End Facebook SDK -->
+    <div id="modal-window"></div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">BracketCode</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="dropdown active">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Brackets <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li class="dropdown-header">New Bracket</li>
+                <li class="active"><a href="#">Create a Bracket</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Existing Brackets</li>
+                <li><a href="#">Load a Bracket</a></li>
+                <li><a href="#">Compare Brackets</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Current Standings</li>
+                <li><a href="bracket/">Bracket Results</a></li>
+              </ul>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+    
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <!--<div class="jumbotron">
+      <div class="container">
+        <h1>Make your own bracket!</h1>
+        <p>Make your own bracket, and then get a BracketCode to share your bracket with!</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Start &raquo;</a></p>
+      </div>
+    </div>-->
+
+    <div class="container">
+      <div id="content-wrapper">
+        <div id="table">
+      
+      <!-- Table Dates -->
+          <table class="gridtable">
+              <tr>
+              <th class="round_1 current"> 2nd ROUND </th>
+              <th class="round_2 "> 3rd ROUND </th>
+              <th class="round_3"> SWEET 16 </th>
+              <th class="round_4"> ELITE EIGHT </th>
+              <th class="round5"> FINAL FOUR </th>
+              <th class="round_6"> CHAMPION </th>
+              <th class="round_5"> FINAL FOUR </th>
+              <th class="round_4"> ELITE EIGHT </th>
+              <th class="round_3"> SWEET 16 </th>
+              <th class="round_2"> 3rd ROUND </th>
+              <th class="round_1 current"> 2nd ROUND </th>
+              </tr>
+              <tr>
+              <td class="current"> March 19-20 </td>
+              <td> March 21-22 </td>
+              <td> March 26-27 </td>
+              <td> March 28-29 </td>
+              <td> April 4 </td>
+              <td> April 6 </td>
+              <td> April 4 </td>
+              <td> March 28-29 </td>
+              <td> March 26-27 </td>
+              <td> March 21-22 </td>
+              <td class="current"> March 19-20 </td>
+              </tr>
+          </table>
+          </div>
+      
+      <!-- Bracket -->
+          <div id="bracket">
+          <div id="round1" class="round">
+              <h3>
+              Round One (2015 NCAA Men's Basketball Tournament) 
+              </h3>
+      
+      <!-- start region1 -->
+              <div class="region region1">
+              <h4 class="region1 first_region">
+                  MIDWEST 
+              </h4>
+              <div id="matchmw1" class="match m1">
+                  <p class="slot slot1">
+                  <strike><span class="seed">MW1_T1</span> <span class="team">MW1_T1</span> <em class="score">0</em> </strike> 
+                  </p>
+                  <p class="slot slot2">
+                  <strong><span class="seed">MW1_T2</span> <span class="team">MW1_T2</span> <em class="score">0</em></strong> 
+                  </p>
+              </div>
+      
+      <!-- /#match18 -->
+              <div id="matchmw2" class="match m2">
+                  <p class="slot slot1">
+                  <span class="seed">MW2_T1</span> <span class="team">MW2_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">MW2_T2</span> <span class="team">MW2_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match19 -->
+              <div id="matchmw3" class="match m3">
+                  <p class="slot slot1">
+                  <span class="seed">MW3_T1</span> <span class="team">MW3_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">MW3_T2</span> <span class="team">MW3_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match20 -->
+              <div id="matchmw4" class="match m4">
+                  <p class="slot slot1">
+                  <span class="seed">MW4_T1</span> <span class="team">MW4_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">MW4_T2</span> <span class="team">MW4_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match21 -->
+              <div id="matchmw5" class="match m5">
+                  <p class="slot slot1">
+                  <span class="seed">MW5_T1</span> <span class="team">MW5_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">MW5_T2</span> <span class="team">MW5_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+              <div id="matchmw6" class="match m6">
+                  <p class="slot slot1">
+                  <span class="seed">MW6_T1</span> <span class="team">MW6_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">MW6_T2</span> <span class="team">MW6_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match23 -->
+              <div id="matchmw7" class="match m7">
+                  <p class="slot slot1">
+                  <span class="seed">MW7_T1</span> <span class="team">MW7_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">MW7_T2</span> <span class="team">MW7_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match24 -->
+              <div id="matchmw8" class="match m8">
+                  <p class="slot slot1">
+                  <span class="seed">MW8_T1</span> <span class="team">MW8_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">MW8_T2</span> <span class="team">MW8_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match25 -->
+              </div>
+      <!-- /.region1 -->
+      <!-- start region2 -->
+              <div class="region region2">
+              <h4 class="region2 first_region">
+                  West 
+              </h4>
+              <div id="matchw1" class="match m1">
+                  <p class="slot slot1">
+                  <span class="seed">W1_T1</span> <span class="team">W1_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">W1_T2</span> <span class="team">W1_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match26 -->
+              <div id="matchw2" class="match m2">
+                  <p class="slot slot1">
+                  <span class="seed">W2_T1</span> <span class="team">W2_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">W2_T2</span> <span class="team">W2_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- #/match27 -->
+              <div id="matchw3" class="match m3">
+                  <p class="slot slot1">
+                  <span class="seed">W3_T1</span> <span class="team">W3_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">W3_T2</span> <span class="team">W3_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- #/match28 -->
+              <div id="matchw4" class="match m4">
+                  <p class="slot slot1">
+                  <span class="seed">W4_T1</span> <span class="team">W4_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">W4_T2</span> <span class="team">W4_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- #/match29 -->
+              <div id="matchw5" class="match m5">
+                  <p class="slot slot1">
+                  <span class="seed">W5_T1</span> <span class="team">W5_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">W5_T2</span> <span class="team">W5_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match30 -->
+              <div id="matchw6" class="match m6">
+                  <p class="slot slot1">
+                  <span class="seed">W6_T1</span> <span class="team">W6_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">W6_T2</span> <span class="team">W6_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!--/#match31-->
+              <div id="matchw7" class="match m7">
+                  <p class="slot slot1">
+                  <span class="seed">W7_T1</span> <span class="team">W7_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">W7_T2</span> <span class="team">W7_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!--/#match32-->
+              <div id="matchw8" class="match m8">
+                  <p class="slot slot1">
+                  <span class="seed">W8_T1</span> <span class="team">W8_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">W8_T2</span> <span class="team">W8_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match33 -->
+              </div>
+      <!-- /.region2 -->
+      <!-- start region3 -->
+              <div class="region region3">
+              <h4 class="region3 first_region">
+                  EAST 
+              </h4>
+              <div id="matche1" class="match m1">
+                  <p class="slot slot1">
+                  <span class="seed">E1_T1</span> <span class="team">E1_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">E1_T2</span> <span class="team">E1_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!--#/match65-->
+              <div id="matche2" class="match m2">
+                  <p class="slot slot1">
+                  <span class="seed">E2_T1</span> <span class="team">E2_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">E2_T2</span> <span class="team">E2_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- #/match66 -->
+              <div id="matche3" class="match m3">
+                  <p class="slot slot1">
+                  <span class="seed">E3_T1</span> <span class="team">E3_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">E3_T2</span> <span class="team">E3_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!--/#match4 -->
+              <div id="matche4" class="match m4">
+                  <p class="slot slot1">
+                  <span class="seed">E4_T1</span> <span class="team">E4_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">E4_T2</span> <span class="team">E4_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match5 -->
+              <div id="matche5" class="match m5">
+                  <p class="slot slot1">
+                  <span class="seed">E5_T1</span> <span class="team">E5_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">E5_T2</span> <span class="team">E5_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match6 -->
+              <div id="matche6" class="match m6">
+                  <p class="slot slot1">
+                  <span class="seed">E6_T1</span> <span class="team">E6_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">E6_T2</span> <span class="team">E6_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match7 -->
+              <div id="matche7" class="match m7">
+                  <p class="slot slot1">
+                  <span class="seed">E7_T1</span> <span class="team">E7_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">E7_T2</span> <span class="team">E7_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match8 -->
+              <div id="matche8" class="match m8">
+                  <p class="slot slot1">
+                  <span class="seed">E8_T1</span> <span class="team">E8_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">E8_T2</span> <span class="team">E8_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match9 -->
+              </div>
+      <!-- /.region3 -->
+      <!-- start region4 -->
+              <div class="region region4">
+              <h4 class="region4 first_region">
+                  South 
+              </h4>
+              <div id="matchs1" class="match m1">
+                  <p class="slot slot1">
+                  <span class="seed">S1_T1</span> <span class="team">S1_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">S1_T2</span> <span class="team">S1_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match10 -->
+              <div id="matchs2" class="match m2">
+                  <p class="slot slot1">
+                  <span class="seed">S2_T1</span> <span class="team">S2_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">S2_T2</span> <span class="team">S2_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match11 -->
+              <div id="matchs3" class="match m3">
+                  <p class="slot slot1">
+                  <span class="seed">S3_T1</span> <span class="team">S3_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">S3_T2</span> <span class="team">S3_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match12 -->
+              <div id="matchs4" class="match m4">
+                  <p class="slot slot1">
+                  <span class="seed">S4_T1</span> <span class="team">S4_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">S4_T2</span> <span class="team">S4_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match13 -->
+              <div id="matchs5" class="match m5">
+                  <p class="slot slot1">
+                  <span class="seed">S5_T1</span> <span class="team">S5_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">S5_T2</span> <span class="team">S5_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match14 -->
+              <div id="matchs6" class="match m6">
+                  <p class="slot slot1">
+                  <span class="seed">S6_T1</span> <span class="team">S6_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">S6_T2</span> <span class="team">S6_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+              <div id="matchs7" class="match m7">
+                  <p class="slot slot1">
+                  <span class="seed">S7_T1</span> <span class="team">S7_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">S7_T2</span> <span class="team">S7_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match16 -->
+              <div id="matchs8" class="match m8">
+                  <p class="slot slot1">
+                  <span class="seed">S8_T1</span> <span class="team">S8_T1</span> <em class="score">0</em> 
+                  </p>
+                  <p class="slot slot2">
+                  <span class="seed">S8_T2</span> <span class="team">S8_T2</span> <em class="score">0</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match17 -->
+              </div>
+      <!-- /.region4 -->
+          </div>
+      <!-- /#round1 -->
+          <div id="round2" class="round">
+              <h3>
+              Round Two (2015 NCAA Men's Basketball Tournament) 
+              </h3>
+              <div class="region region1">
+              <h4 class="region1">
+                  MIDWEST 
+              </h4>
+              <div id="matchmw_r2_1" class="match m1">
+                  <p rel="matchmw1" class="slot slot1">
+                  <span class="seed">1</span> TEAM <em class="score">24</em> 
+                  </p>
+                  <p rel="matchmw2" class="slot slot2">
+                  <span class="seed">9</span> TEAM <em class="score">67</em> 
+                  </p>
+              </div>
+      
+      <!-- /#match41 -->
+              <div id="matchmw_r2_2" class="match m2">
+                  <p rel="matchmw3" class="slot slot1">
+                  </p>
+                  <p rel="matchmw4" class="slot slot2">
+                  </p>
+              </div>
+      <!-- /#match42 -->
+              <div id="matchmw_r2_3" class="match m3">
+                  <p rel="matchmw5" class="slot slot1">
+                  </p>
+                  <p rel="matchmw6" class="slot slot2">
+                  </p>
+              </div>
+      <!-- /#match43 -->
+              <div id="matchmw_r2_4" class="match m4">
+                  <p rel="matchmw7" class="slot slot1">
+                  </p>
+                  <p rel="matchmw8" class="slot slot2">
+                  </p>
+              </div>
+      <!-- /#match44 -->
+              </div>
+      <!-- /.region1 -->
+              <div class="region region2">
+              <h4 class="region2">
+                  WEST 
+              </h4>
+              <div id="matchw_r2_1" class="match m1">
+                  <p rel="matchw1" class="slot slot1">
+                  </p>
+                  <p rel="matchw2" class="slot slot2">
+                  </p>
+              </div>
+              <div id="matchw_r2_2" class="match m2">
+                  <p rel="matchw3" class="slot slot1">
+                  </p>
+                  <p rel="matchw4" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!-- /#match46 -->
+              <div id="matchw_r2_3" class="match m3">
+                  <p rel="matchw5" class="slot slot1">
+                  </p>
+                  <p rel="matchw6" class="slot slot2">
+                  </p>
+              </div>
+              <div id="matchw_r2_4" class="match m4">
+                  <p rel="matchw7" class="slot slot1">
+                  </p>
+                  <p rel="matchw8" class="slot slot2">
+                  </p>
+              </div>
+      <!-- /#match48 -->
+              </div>
+              <div class="region region3">
+              <h4 class="region3">
+                  East 
+              </h4>
+              <div id="matche_r2_1" class="match m1">
+                  <p rel="matche1" class="slot slot1">
+                  </p>
+                  <p rel="matche2" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!--/match3-->
+              <div id="matche_r2_2" class="match m2">
+                  <p rel="matche3" class="slot slot1">
+                  </p>
+                  <p rel="matche4" class="slot slot2">
+                  </p>
+              </div>
+      <!-- #/match34 -->
+              <div id="matche_r2_3" class="match m3">
+                  <p rel="matche5" class="slot slot1">
+                  </p>
+                  <p rel="matche6" class="slot slot2">
+                  </p>
+              </div>
+      <!-- #/match35 -->
+              <div id="matche_r2_4" class="match m4">
+                  <p rel="matche7" class="slot slot1">
+                  </p>
+                  <p rel="matche8" class="slot slot2">
+                  </p>
+              </div>
+      <!-- #/match36 -->
+              </div>
+      <!--/.region3-->
+              <div class="region region4">
+              <h4 class="region4">
+                  South 
+              </h4>
+              <div id="matchs_r2_1" class="match m1">
+                  <p rel="matchs1" class="slot slot1">
+                  </p>
+                  <p rel="matchs2" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!--/#match37-->
+              <div id="matchs_r2_2" class="match m2">
+                  <p rel="matchs3" class="slot slot1">
+                  </p>
+                  <p rel="matchs4" class="slot slot2">
+                  </p>
+              </div>
+      <!--/#match38-->
+              <div id="matchs_r2_3" class="match m3">
+                  <p rel="matchs5" class="slot slot1">
+                  </p>
+                  <p rel="matchs6" class="slot slot2">
+                  </p>
+              </div>
+      <!--/#match39-->
+              <div id="matchs_r2_4" class="match m4">
+                  <p rel="matchs7" class="slot slot1">
+                  </p>
+                  <p rel="matchs8" class="slot slot2">
+                  </p>
+              </div>
+      <!--/#match40-->
+              </div>
+      <!--/.region4-->
+          </div>
+          <div id="round3" class="round">
+              <h3>
+              Round Three (2015 NCAA Men's Basketball Tournament) 
+              </h3>
+              <div class="region region1">
+              <h4 class="region1">
+                  Midwest 
+              </h4>
+              <div id="matchmw_r3_1" class="match m1">
+                  <p rel="matchmw_r2_1" class="slot slot1">
+                  </p>
+                  <p rel="matchmw_r2_2" class="slot slot2">
+                  </p>
+              </div>
+              <div id="matchmw_r3_2" class="match m2">
+                  <p rel="matchmw_r2_3" class="slot slot1">
+                  </p>
+                  <p rel="matchmw_r2_4" class="slot slot2">
+                  </p>
+              </div>
+              </div>
+      
+      <!-- /.region1 -->
+              <div class="region region2">
+              <h4 class="region2">
+                  West 
+              </h4>
+              <div id="matchw_r3_1" class="match m1">
+                  <p rel="matchw_r2_1" class="slot slot1">
+                  </p>
+                  <p rel="matchw_r2_2" class="slot slot2">
+                  </p>
+              </div>
+              <div id="matchw_r3_2" class="match m2">
+                  <p rel="matchw_r2_3" class="slot slot1">
+                  </p>
+                  <p rel="matchw_r2_4" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!--/#match56-->
+              </div>
+              <div class="region region3">
+              <h4 class="region3">
+                  East 
+              </h4>
+              <div id="matche_r3_1" class="match m1">
+                  <p rel="matche_r2_1" class="slot slot1">
+                  </p>
+                  <p rel="matche_r2_2" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!--/#match49-->
+              <div id="matche_r3_2" class="match m2">
+                  <p rel="matche_r2_3" class="slot slot1">
+                  </p>
+                  <p rel="matche_r2_4" class="slot slot2">
+                  </p>
+              </div>
+      <!--/#match50-->
+              </div>
+      <!-- /.region3 -->
+              <div class="region region4">
+              <h4 class="region4">
+                  South 
+              </h4>
+              <div id="matchs_r3_1" class="match m1">
+                  <p rel="matchs_r2_1" class="slot slot1">
+                  </p>
+                  <p rel="matchs_r2_2" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!--/#match51-->
+              <div id="matchs_r3_2" class="match m2">
+                  <p rel="matchs_r2_3" class="slot slot1">
+                  </p>
+                  <p rel="matchs_r2_4" class="slot slot2">
+                  </p>
+              </div>
+      <!--/#match52-->
+              </div>
+      <!-- /.region4 -->
+          </div>
+          <div id="round4" class="round">
+              <h3>
+              Round Four (2015 NCAA Men's Basketball Tournament) 
+              </h3>
+              <div class="region region1">
+              <h4 class="region1">
+                  Midwest 
+              </h4>
+              <div id="matchmw_r4_1" class="match m1">
+                  <p rel="matchmw_r3_1" class="slot slot1">
+                  </p>
+                  <p rel="matchmw_r3_2" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!-- /#match60 -->
+              </div>
+      <!-- /.region1 -->
+              <div class="region region2">
+              <h4 class="region2">
+                  West 
+              </h4>
+              <div id="matchw_r4_1" class="match m1">
+                  <p rel="matchw_r3_1" class="slot slot1">
+                  </p>
+                  <p rel="matchw_r3_2" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!-- /#match61 -->
+              </div>
+      <!-- /.region2 -->
+              <div class="region region3">
+              <h4 class="region3">
+                  East 
+              </h4>
+              <div id="matche_r4_1" class="match m1">
+                  <p rel="matche_r3_1" class="slot slot1">
+                  </p>
+                  <p rel="matche_r3_2" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!-- /#match58 -->
+              </div>
+      <!--/.region3-->
+              <div class="region region4">
+              <h4 class="region4">
+                  South 
+              </h4>
+              <div id="matchs_r4_1" class="match m1">
+                  <p rel="matchs_r3_1" class="slot slot1">
+                  </p>
+                  <p rel="matchs_r3_2" class="slot slot2">
+                  </p>
+              </div>
+      
+      <!--/#match59-->
+              </div>
+      <!--/#match59-->
+          </div>
+          <div id="round5" class="round">
+              <h3>
+              Round Five (2015 NCAA Men's Basketball Tournament) 
+              </h3>
+              <div class="region">
+              <div id="match_r5_mw_w" class="match m1">
+                  <p rel="matchmw_r4_1" class="slot slot1">
+                  </p>
+                  <p rel="matchw_r4_1" class="slot slot2">
+                  </p>
+              </div>
+              <div id="match_r5_e_s" class="match m2">
+                  <p rel="matche_r4_1" class="slot slot1">
+                  </p>
+                  <p rel="matchs_r4_1" class="slot slot2">
+                  </p>
+              </div>
+              </div>
+          </div>
+          <div id="round6" class="round">
+              <h3>
+              Round Six (2015 NCAA Men's Basketball Tournament) 
+              </h3>
+              <div class="region">
+              <div id="match_r6_champion" class="match m1">
+                  <p rel="match_r5_mw_w" class="slot slot1" id="slot127">
+                  <strong><span class="seed">0</span> Winner <em class="score">65</em></strong>
+      <!-- winner -->
+                  </p>
+                  <p rel="match_r5_e_s" class="slot slot2" id="slot128">
+                  <strike><span class="seed">4</span> Loser <em class="score">60</em></strike>
+      <!-- loser -->
+                  </p>
+              </div>
+              </div>
+          </div>
+          </div>
+      </div>
+      <div class="social">
+        <br />
+        <span class="twitter">
+          <a class="twitter-share-button"
+            href="https://twitter.com/share">
+          Tweet
+          </a>
+        </span>
+        <span class="google">
+          <div class="g-plusone" data-annotation="inline" data-width="215" data-size="medium" data-href="https://bracketcode.github.io/"></div>
+        </span>
+      </div>
+      <div class="social">
+        <span class="facebook">
+          <div class="fb-like" data-href="https://bracketcode.github.io/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-width="300"></div>
+        </span>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; BracketCode 2015</p>
+      </footer>
+    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+        <script src="../js/vendor/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js"></script>
+        <script src="../js/plugins.js"></script>
+        <script src="../js/main.js"></script>
+        
+        <script src="js/es5-shim.min.js"></script>
+        <script src="js/js-yaml.min.js"></script>
+        <script src="js/bracket.js"></script>
+        
+        <script>
+        window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+        </script>
+        
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-60931821-1','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>
