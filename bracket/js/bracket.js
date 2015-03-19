@@ -15,6 +15,11 @@ function loadBracketData() {
         console.log("Bracket loaded!")
         //populateBracket();
         showBracket(); // remove after debug
+    })
+    .error(function() {
+        showLoadingWindow("ERROR: Could not load matchups for the bracket.<br />" +
+            "<a href='javascript:hideLoadingWindow()' style='color: #fff; text-decoration: underline'><b>Close</b></a>",
+            "Loading Failed!");
     });
 }
 
@@ -92,6 +97,7 @@ function showBracket() {
         opacity: "1",
       }, 1000, function() {});
     initializeBracketTransitions();
+    initializeBracketClickability();
 }
 
 function initializeBracketTransitions() {
@@ -112,6 +118,17 @@ function initializeBracketTransitions() {
       // Animation complete.
       });
     });
+}
+
+function initializeBracketClickability() {
+    $( ".slot" ).click(function() {
+        bracketClick(this);
+    });
+}
+
+function bracketClick(bracketSlot) {
+    matchID = $(bracketSlot).parent().attr('id');
+    console.log("bracketClick: matchID is "+matchID);
 }
 
 
