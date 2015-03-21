@@ -1,3 +1,23 @@
+/*
+ * 999 lines of code on the screen, 999 lines of code.
+ * Take one down, debug it around, 998 lines of code on the screen...
+ * 
+ * 99 hours of life on the wall, 99 hours of life.
+ * Spend one now, drive it around, 98 hours of life on the wall...
+ * 
+ * 99 bottles of beer on the wall, 99 bottles of beer.
+ * Take one down, pass it around, 98 bottles of beer on the wall...
+ * 
+ * ...
+ * 
+ * No more lines of code on the screen, no more lines of code.
+ * No more hours of life on the wall, no more hours of life.
+ * No more bottles of beer on the wall, no more bottles of beer.
+ * 
+ * Too tired to go to the store and buy some more, 0 bottles of beer on
+ * the wall...
+ */
+
 var bracketJSLoaded = true;
 var bracket = null;
 var picks = null;
