@@ -33,10 +33,6 @@
         
         <link rel="stylesheet" href="css/bracket.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.css">
-        
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.css">
-        
-        <link rel="stylesheet" href="css/debug.css">
 
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
@@ -99,6 +95,11 @@
 
     <div class="container">
       <div id="content-wrapper">
+          <button type="button" id="importBtn" class="btn btn-warning" onclick="importBracket()">Import Bracket</button> 
+          <button type="button" id="saveShareBtn" class="btn btn-success" onclick="saveAndShare()"><strike>Save + Share</strike></button>
+          <button type="button" id="resetBtn" class="btn btn-danger" onclick="resetBracket()">Reset Bracket</button>
+          <br /><br />
+          
         <div id="table">
       
       <!-- Table Dates -->
@@ -807,6 +808,19 @@
               </div>
               </div>
           </div>
+          <div id="round7" class="round" style="left: 395px; width: 150px;">
+              <div class="region">
+              <div id="match_r7_final_champion" style="
+                    top: 340px;
+                    height: 55px;
+                    width: 150px;
+                    border: 1px solid;
+                    padding: 4px;
+                    position: absolute;">CHAMPION
+              <p rel="match_r6_champion" class="slot slot1" id="slot129" style="opacity: 1;"><span class="seed">1</span> <span class="team"></span> <em class="score"></em></p>
+              </div>
+              </div>
+          </div>
           </div>
       </div>
       <div class="social">
@@ -838,16 +852,14 @@
         <script src="../js/vendor/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
         <script src="https://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
         <script src="../js/plugins.js"></script>
         <script src="../js/main.js"></script>
         
         <script src="js/es5-shim.min.js"></script>
         <script src="js/js-yaml.min.js"></script>
-        <script src="js/bracket.js"></script>
         
-        <script src="js/jquery.console.js"></script>
-        <script src="js/debug.js"></script>
+        <script src="js/bracketcode.js"></script>
+        <script src="js/bracket.js"></script>
         
         <script>
         window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));

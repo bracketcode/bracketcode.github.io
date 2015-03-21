@@ -2,6 +2,9 @@ var debugConsoleContainer;
 var debugConsoleController;
 var oldConsoleLog;
 
+var debugConsoleDepReady = false;
+var debugConsoleReady = false;
+
 var consoleLogHooked = false;
 
 if(!(typeof console === "undefined")) {
@@ -21,81 +24,92 @@ Array.prototype.unique = function() {
 };
 
 function initDebugConsole() {
-    debugConsoleContainer = $('<div class="console" id="debugConsole">');
-    $('body').append(debugConsoleContainer);
-    debugConsoleContainer.hide();
-    debugConsoleController = debugConsoleContainer.console({
-           promptLabel: '>> ',
-           commandValidate:function(line){
-             if (line == "") return false;
-             else return true;
-           },
-           commandHandle:function(line){
-               try { var ret = eval(line);
-                     if (typeof ret != 'undefined') return ret.toString();
-                     else return true; }
-               catch (e) { return e.toString(); }
-           },
-           completeHandle:function(prefix){
-               result = "";
-               
-               if (prefix.lastIndexOf(".") != -1) {
-                   objectSearch = prefix.substring(0, prefix.lastIndexOf("."));
-                   truePrefix = prefix.substring(prefix.lastIndexOf(".") + 1);
-               } else {
-                   objectSearch = "window";
-                   truePrefix = prefix;
-               }
-               
-               //console.log("objectSearch = "+objectSearch+", truePrefix = "+truePrefix);
-               
-               found = [];
-               keys = [];
-               keys1 = [];
-               keys2 = [];
-               keys3 = [];
-               try {
-                    keys1 = Object.keys(eval(objectSearch));
-                } catch (e) {}
-                try {
-                    keys2 = Object.getOwnPropertyNames(eval(objectSearch));
-                } catch (e) {}
-               
-               try {
-                   for (var k in eval(objectSearch)) {
-                       keys3.push(k);
-                    }
-                } catch(e) {}
-                
-               keys = keys1.concat(keys2).concat(keys3).unique()
-               
-               for (var i = 0; i < keys.length; i++) {
-                   item = keys[i];
-                   //console.log("completeHandle: "+item);
-                   if (item.indexOf(truePrefix) === 0) {
-                       //console.log("FOUND: "+item);
-                       found.push(item.substring(truePrefix.length));
+    if (debugConsoleDepReady) {
+        debugConsoleContainer = $('<div class="console" id="debugConsole">');
+        $('body').append(debugConsoleContainer);
+        debugConsoleContainer.hide();
+        debugConsoleController = debugConsoleContainer.console({
+               promptLabel: '>> ',
+               commandValidate:function(line){
+                 if (line == "") return false;
+                 else return true;
+               },
+               commandHandle:function(line){
+                   try { var ret = eval(line);
+                         if (typeof ret != 'undefined') return ret.toString();
+                         else return true; }
+                   catch (e) { return e.toString(); }
+               },
+               completeHandle:function(prefix){
+                   result = "";
+                   
+                   if (prefix.lastIndexOf(".") != -1) {
+                       objectSearch = prefix.substring(0, prefix.lastIndexOf("."));
+                       truePrefix = prefix.substring(prefix.lastIndexOf(".") + 1);
+                   } else {
+                       objectSearch = "window";
+                       truePrefix = prefix;
                    }
-               }
-               
-               //console.log("FOUND: "+found_globals.length);
-               return found;
-           },
-           cols: 50,
-           animateScroll:true,
-           promptHistory:true,
-           welcomeMessage:'Debug Console\n=============\n'+
-                            'This is a Javascript console. For help, type\n'+
-                            '"helpDebugConsole()". Tab completion is available.',
-         });
+                   
+                   //console.log("objectSearch = "+objectSearch+", truePrefix = "+truePrefix);
+                   
+                   found = [];
+                   keys = [];
+                   keys1 = [];
+                   keys2 = [];
+                   keys3 = [];
+                   try {
+                        keys1 = Object.keys(eval(objectSearch));
+                    } catch (e) {}
+                    try {
+                        keys2 = Object.getOwnPropertyNames(eval(objectSearch));
+                    } catch (e) {}
+                   
+                   try {
+                       for (var k in eval(objectSearch)) {
+                           keys3.push(k);
+                        }
+                    } catch(e) {}
+                    
+                   keys = keys1.concat(keys2).concat(keys3).unique()
+                   
+                   for (var i = 0; i < keys.length; i++) {
+                       item = keys[i];
+                       //console.log("completeHandle: "+item);
+                       if (item.indexOf(truePrefix) === 0) {
+                           //console.log("FOUND: "+item);
+                           found.push(item.substring(truePrefix.length));
+                       }
+                   }
+                   
+                   //console.log("FOUND: "+found_globals.length);
+                   return found;
+               },
+               cols: 50,
+               animateScroll:true,
+               promptHistory:true,
+               welcomeMessage:'Debug Console\n=============\n'+
+                                'This is a Javascript console. For help, type\n'+
+                                '"helpDebugConsole()". Tab completion is available.',
+             });
+    } else {
+        // Not ready yet, reload in a second...
+        setTimeout(initDebugConsole, 1000);
+    }
 }
 
 function showDebugConsole() {
-    $( "#debugConsole" ).dialog({
-        title: "Debug Console",
-        height: 360,
-        width: 535,
-    });
+    if (debugConsoleDepReady && (debugConsoleController != null)) {
+        $( "#debugConsole" ).dialog({
+            title: "Debug Console",
+            height: 360,
+            width: 535,
+        });
+        debugConsoleReady = true;
+    } else {
+        // Not ready yet, reload in a second...
+        setTimeout(showDebugConsole, 1000);
+    }
 }
 
 function hideDebugConsole() {
@@ -128,20 +142,31 @@ function helpDebugConsole() {
 }
 
 function initHookConsoleLog() {
-    console.log = function (message) {
-        if (typeof message == 'object') {
-            consoleMsg = (JSON && JSON.stringify ? JSON.stringify(message) : message);
-        } else {
-            consoleMsg = message;
+    if (debugConsoleDepReady) {
+        console.log = function (message) {
+            if (typeof message == 'object') {
+                consoleMsg = (JSON && JSON.stringify ? JSON.stringify(message) : message);
+            } else {
+                consoleMsg = message;
+            }
+            debugConsoleController.report(consoleMsg, "jquery-console-message-value");
+            if(!(typeof oldConsoleLog === "undefined")) {
+                oldConsoleLog(message);
+            }
         }
-        debugConsoleController.report(consoleMsg, "jquery-console-message-value");
-        if(!(typeof oldConsoleLog === "undefined")) {
-            oldConsoleLog(message);
-        }
+        consoleLogHooked = true;
+    } else {
+        // Not ready yet, reload in a second...
+        setTimeout(initHookConsoleLog, 1000);
     }
-    consoleLogHooked = true;
 }
 
-initDebugConsole();
-initHookConsoleLog();
-showDebugConsole();
+$.getScript( "https://code.jquery.com/ui/1.11.3/jquery-ui.min.js", function() {
+    $.getScript( "js/jquery.console.js", function() {
+        $('<link>')
+          .appendTo('head')
+          .attr({type : 'text/css', rel : 'stylesheet'})
+          .attr('href', 'https://code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.css');
+        debugConsoleDepReady = true;
+    });
+});
