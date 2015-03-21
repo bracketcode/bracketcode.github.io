@@ -103,7 +103,7 @@ function loadBracketData() {
         populateBracket();
     })
     .error(function() {
-        console.log("ERROR: Could not load matchups for the bracket.");
+        bracketDebug("ERROR: Could not load matchups for the bracket.");
         showJSModalWindow("ERROR: Could not load matchups for the bracket.<br />" +
             "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>",
             "Loading Failed!");
@@ -420,7 +420,7 @@ function importPicks(code) {
         rawPicks = bracketCode.decode(code);
         picks = rawPicks;
     } catch (e) {
-        console.log("ERROR OCCURRED WHILE IMPORTING '"+code+"': "+e);
+        bracketDebug("ERROR OCCURRED WHILE IMPORTING '"+code+"': "+e);
         showJSModalWindow("ERROR: The BracketCode you entered doesn't seem to work.<br />" +
                 "<a href='javascript:importBracket()' class='btn btn-success btn-xs'><b>Try Again</b></a> "+
                 "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "Error");
@@ -502,7 +502,7 @@ function actuallyResetBracket() {
         for (var round in picks) {
             if (round == "round1") continue;
             $("#"+round+" .region .match .slot").html("");
-            console.log("Bringing back: "+round);
+            bracketDebug("Bringing back: "+round);
             $("#"+round).animate({
                 opacity: 1,
             }, 300);
@@ -527,7 +527,7 @@ function renderPicks(rPicks) {
         
         for (regionCounter = 0; regionCounter < numRegions; regionCounter++) {
             matchObjs = $($("#round"+trueRound).children("div")[regionCounter]).children("div");
-            console.log("TRY: "+round);
+            bracketDebug("TRY: "+round);
             if (((matchObjs.length * 2) == (rPicks[round].length / numRegions))
                 || (((matchObjs.length * 2) == rPicks[round].length))
                 || (matchObjs.length == rPicks[round].length)) {
@@ -544,8 +544,8 @@ function renderPicks(rPicks) {
                         
                         prevMatchID = slotObj.attr('rel');
                         
-                        console.log("round = "+round+", matchObj (i) = "+i+", slot (j) = "+j+", matchSlot = "+matchSlot+", prevMatchID = "+prevMatchID);
-                        console.log(matchObjs);
+                        bracketDebug("round = "+round+", matchObj (i) = "+i+", slot (j) = "+j+", matchSlot = "+matchSlot+", prevMatchID = "+prevMatchID);
+                        bracketDebug(matchObjs);
                         
                         slotSeedObj = $('<span class="seed">');
                         slotSeedObj.html($("#"+prevMatchID+" ."+matchSlot+" .seed").html());
@@ -564,9 +564,9 @@ function renderPicks(rPicks) {
                         slotObj.html(slotObj.html() + " ");
                         slotObj.append(slotScoreObj);
                         
-                        if ($(matchObjs[i]).children('p').length == 1) { console.log("Done round due to no more child objs, breaking"); break; }
+                        if ($(matchObjs[i]).children('p').length == 1) { bracketDebug("Done round due to no more child objs, breaking"); break; }
                     }
-                    if (matchObjs.length == 1) { console.log("Done round due to no more objs, breaking"); break; }
+                    if (matchObjs.length == 1) { bracketDebug("Done round due to no more objs, breaking"); break; }
                 }
             } else {
                 throw "Length mismatch at round "+round+"! (matchObjs.length = "+matchObjs.length+", rPicks[round].length = "+rPicks[round].length;
