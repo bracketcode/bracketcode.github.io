@@ -17,6 +17,12 @@
  * Too tired to go to the store and buy some more, 0 bottles of beer on
  * the wall...
  */
+ 
+// TODO:
+// Link recognition (via hash # and/or GET ?param=bla)
+// Twitter / Facebook integration
+// Comparison
+// Results loading
 
 var bracketJSLoaded = true;
 var bracket = null;
@@ -493,7 +499,7 @@ function saveAndShare() {
 
 function resetBracket() {
     showJSModalWindow("Are you sure you want to reset your bracket? <b>Your bracket will be LOST.</b><br />" +
-                "<a href='javascript:triggerResetBracket()' class='btn btn-danger btn-xs'><b>Yes, reset my bracket</b></a> <a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>No</b></a>", "Oops!");
+                "<a href='javascript:triggerResetBracket()' class='btn btn-danger btn-xs'><b>Yes</b></a> <a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>No, back to safety</b></a>", "Oops!");
 }
 
 function triggerResetBracket() {
