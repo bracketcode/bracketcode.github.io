@@ -151,7 +151,7 @@ function showJSModalWindow(msg, title, callback) {
                     if(typeof callback === "function") {
                         callback();
                     }
-                );
+                });
             });
     } else {
         $('#modal-window').qtip({
@@ -437,8 +437,16 @@ function importBracket() {
                 "<a href='javascript:actuallyImportBracket()' class='btn btn-warning btn-xs'><b>Import</b></a> "+
                 "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "BracketCode - Import Bracket",
                 function() {
-                    alert("Callback triggered");
-                    $("#bracketCodeInput").focus();
+                    //alert("Callback triggered");
+                    setTimeout(function() {
+                        $("#bracketCodeInput").keypress(function (e) {
+                            if (e.which == 13) {
+                                actuallyImportBracket();
+                                return false;
+                            }
+                        });
+                        $("#bracketCodeInput").focus();
+                    }, 200);
                 });
 }
 
@@ -456,8 +464,14 @@ function importPicks(code) {
     } catch (e) {
         bracketDebug("ERROR OCCURRED WHILE IMPORTING '"+code+"': "+e);
         showJSModalWindow("ERROR: The BracketCode you entered doesn't seem to work.<br />" +
-                "<a href='javascript:importBracket()' class='btn btn-success btn-xs'><b>Try Again</b></a> "+
-                "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "Error");
+                "<a href='javascript:importBracket()' id='btnTryAgain' class='btn btn-success btn-xs'><b>Try Again</b></a> "+
+                "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "Error",
+                function() {
+                    //alert("Callback triggered");
+                    setTimeout(function() {
+                        $("#btnTryAgain").focus();
+                    }, 200);
+                });
         return;
     }
     
@@ -507,7 +521,14 @@ function saveAndShare() {
 
 function resetBracket() {
     showJSModalWindow("Are you sure you want to reset your bracket? <b>Your bracket will be LOST.</b><br />" +
-                "<a href='javascript:triggerResetBracket()' class='btn btn-danger btn-xs'><b>Yes</b></a> <a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>No, back to safety</b></a>", "BracketCode - Reset Bracket");
+                "<a href='javascript:triggerResetBracket()' class='btn btn-danger btn-xs'><b>Yes</b></a> "+
+                "<a href='javascript:hideJSModalWindow()' id='btnNo' class='btn btn-default btn-xs'><b>No, back to safety</b></a>",
+                "BracketCode - Reset Bracket",
+                function() {
+                    setTimeout(function() {
+                        $("#btnNo").focus();
+                    }, 200);
+                });
 }
 
 function triggerResetBracket() {
