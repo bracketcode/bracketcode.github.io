@@ -136,7 +136,7 @@ function loadBracketData() {
     });
 }
 
-function showJSModalWindow(msg, title) {
+function showJSModalWindow(msg, title, callback) {
     if ($('#modal-window').attr("data-hasqtip")) {
         // qtip2 already loaded and running, just change content
         $("#qtip-"+$('#modal-window').qtip('api').get('id')).animate({
@@ -179,6 +179,10 @@ function showJSModalWindow(msg, title) {
                     hide: function(event, api) { api.destroy(); }
                 }
             });
+    }
+    
+    if(typeof callback === "function")) {
+        callback();
     }
 }
 
@@ -431,8 +435,10 @@ function importBracket() {
     showJSModalWindow("Import someone else's bracket by entering their BracketCode™ here::<br /><br />"+
                 "<input type='text' id='bracketCodeInput' style='color:#000;width:60%;' /><br /><br />" +
                 "<a href='javascript:actuallyImportBracket()' class='btn btn-warning btn-xs'><b>Import</b></a> "+
-                "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "BracketCode - Import Bracket");
-    $("#bracketCodeInput").focus();
+                "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "BracketCode - Import Bracket",
+                function() {
+                    $("#bracketCodeInput").focus();
+                });
 }
 
 function actuallyImportBracket() {
