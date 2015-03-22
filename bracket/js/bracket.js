@@ -147,7 +147,11 @@ function showJSModalWindow(msg, title, callback) {
                 
                 $("#qtip-"+$('#modal-window').qtip('api').get('id')).animate({
                     opacity: "1",
-                }, 100);
+                }, 100, function() {
+                    if(typeof callback === "function") {
+                        callback();
+                    }
+                );
             });
     } else {
         $('#modal-window').qtip({
@@ -172,17 +176,13 @@ function showJSModalWindow(msg, title, callback) {
                 hide: false,
                 events: {
                     render: function(event, api) {
-                        $('button', api.elements.content).click(function(e) {
-                            api.hide(e);
-                        });
+                        if(typeof callback === "function") {
+                            callback();
+                        }
                     },
                     hide: function(event, api) { api.destroy(); }
                 }
             });
-    }
-    
-    if(typeof callback === "function") {
-        callback();
     }
 }
 
@@ -437,6 +437,7 @@ function importBracket() {
                 "<a href='javascript:actuallyImportBracket()' class='btn btn-warning btn-xs'><b>Import</b></a> "+
                 "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "BracketCode - Import Bracket",
                 function() {
+                    alert("Callback triggered");
                     $("#bracketCodeInput").focus();
                 });
 }
