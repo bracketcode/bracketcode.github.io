@@ -499,7 +499,7 @@ function saveAndShare() {
 
 function resetBracket() {
     showJSModalWindow("Are you sure you want to reset your bracket? <b>Your bracket will be LOST.</b><br />" +
-                "<a href='javascript:triggerResetBracket()' class='btn btn-danger btn-xs'><b>Yes</b></a> <a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>No, back to safety</b></a>", "Oops!");
+                "<a href='javascript:triggerResetBracket()' class='btn btn-danger btn-xs'><b>Yes</b></a> <a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>No, back to safety</b></a>", "BracketCode - Reset Bracket");
 }
 
 function triggerResetBracket() {
