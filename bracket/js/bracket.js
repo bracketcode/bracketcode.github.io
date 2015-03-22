@@ -432,6 +432,7 @@ function importBracket() {
                 "<input type='text' id='bracketCodeInput' style='color:#000;width:60%;' /><br /><br />" +
                 "<a href='javascript:actuallyImportBracket()' class='btn btn-warning btn-xs'><b>Import</b></a> "+
                 "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "BracketCode - Import Bracket");
+    $("#bracketCodeInput").focus();
 }
 
 function actuallyImportBracket() {
