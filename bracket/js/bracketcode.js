@@ -137,3 +137,89 @@ var bracketCode = {
         return done;
     },
 }
+
+var partialBracketCode = {
+    encode: function(bracketObj) {
+        bracketCodeStr = ""
+        
+        for (var round in bracketObj) {
+            // Only add dash if the string isn't blank
+            // We do this so we don't have to do the alternative - truncating
+            // the dash at the end.
+            if (bracketCodeStr != "") bracketCodeStr += "-";
+            roundDigits = ""
+            allDigitsDefined = true;
+            for (i = 0; i < bracketObj[round].length; i++) {
+                if (bracketObj[round][i] == null) {
+                    allDigitsDefined = false;
+                    break;
+                } else {
+                    roundDigits += bracketObj[round][i];
+                }
+            }
+            if (allDigitsDefined) {
+                bracketCodeStr += dec2hex(bin2dec(roundDigits));
+            } else {
+                // Remove leading dash
+                bracketCodeStr.substring(0, bracketCodeStr.length - 1);
+            }
+        }
+        return bracketCodeStr.toUpperCase();
+    },
+    decode: function(bracketCodeStr) {
+        bracketObj = this.makeBracket();
+        
+        bracketPieces = bracketCodeStr.split("-");
+        bracketRoundCounter = 0;
+        
+        initamt = 32;
+        
+        for (var round in bracketObj) {
+            roundDigits = hex2bin(bracketPieces[bracketRoundCounter]);
+            
+            if (roundDigits.length < initamt) {
+                for (i = 0; i < (initamt - roundDigits.length); i++) {
+                    roundDigits = "0" + roundDigits;
+                }
+            } else if (roundDigits.length > initamt) {
+                throw "BracketCode is invalid - "+round+" is too large!";
+            }
+            
+            for (i = 0; i < roundDigits.length; i++) {
+                bracketObj[round][i] = parseInt(roundDigits[i]);
+            }
+            
+            initamt = initamt / 2;
+            bracketRoundCounter++;
+        }
+        
+        return bracketObj;
+    },
+    makeBracket: function() {
+        bracketObj = { round1 : [], round2 : [], round3 : [], round4 : [], round5 : [], round6 : [] };
+        
+        initamt = 32;
+        
+        for (var round in picks) {
+            for (i = 0; i < initamt; i++) {
+                bracketObj[round].push(null);
+            }
+            initamt = initamt / 2;
+        }
+        
+        return bracketObj;
+    },
+    bracketDone: function(bracketObj) {
+        done = true;
+        for (var round in bracketObj) {
+            for (i = 0; i < bracketObj[round].length; i++) {
+                if (bracketObj[round][i] === null) {
+                    done = false;
+                    break;
+                }
+            }
+            if (!done) break;
+        }
+        return done;
+    },
+}

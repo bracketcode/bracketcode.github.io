@@ -7,7 +7,7 @@ lineup:
   regions:
     - Midwest:
       - pair1:
-        - team: Wisconsin
+        - team: Kentucky
           seed: 1
         - team: Hampton
           seed: 16
@@ -48,7 +48,7 @@ lineup:
           seed: 15
     - West:
       - pair1:
-        - team: Kentucky
+        - team: Wisconsin
           seed: 1
         - team: Coastal Caro.
           seed: 16

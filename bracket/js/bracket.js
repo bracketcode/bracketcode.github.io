@@ -25,10 +25,14 @@
 // Results loading
 
 var bracketJSLoaded = true;
+var bracketLoaded = false;
 var bracket = null;
 var picks = null;
 var pickorder = null;
 var bracketDebugEnabled = false;
+var bracketDebugScriptsLoaded = false;
+
+var initialURLDataLoaded = false;
 
 var notifyPicksDone = false;
 
@@ -115,6 +119,14 @@ function arrToStr(arr) {
 }
 
 function loadBracketData() {
+    if (bracketDebugEnabled) {
+        if (!((typeof debugConsoleReady == 'boolean') && (debugConsoleReady))) {
+            setTimeout(loadBracketData, 1000);
+            return;
+        }
+    }
+    
+    bracketDebug("Loading matchups for the bracket...", "Loading...");
     showJSModalWindow("Loading matchups for the bracket...", "Loading...");
     $.ajax({
         url: "yaml/matchup.yaml",
@@ -218,9 +230,97 @@ function populateBracket() {
     }
     //$(".match"+shortcode+num)
     
+    bracketLoaded = true;
     showBracket();
 }
 
+function loadURLData() {
+    // Format:
+    //   #ffffffff-ffff-ff-f-3-1
+    //     Just the code - this will load the BracketCode automatically
+    //   #!c
+    //   #!c,d
+    //      Execute commands c,d
+    //   #!c,d|ffffffff-ffff-ff-f-3-1
+    //      Execute commands c,d and load the given BracketCode automatically
+    
+    if (bracketDebugEnabled) {
+        if (!((typeof debugConsoleReady == 'boolean') && (debugConsoleReady))) {
+            bracketDebug("Debugging is enabled, but it's not ready yet... relaunching loadURLData in 1 second.");
+            setTimeout(loadURLData, 1000);
+            return;
+        }
+    }
+    
+    if (!bracketLoaded) {
+        bracketDebug("Bracket is not ready yet... relaunching loadURLData in 1 second.");
+        setTimeout(loadURLData, 1000);
+        return;
+    }
+    
+    if(window.location.hash) {
+        hash = window.location.hash.substring(1).replace(/\s+/g, '');
+        
+        commands = null;
+        hashBracketCode = null;
+        
+        // Blank hash? Nothing to do here
+        if (hash == '') {
+            initialURLDataLoaded = true;
+            return;
+        }
+        
+        // If this starts with a !, there's a command hash
+        if (hash[0] == '!') {
+            newhash = hash.substring(1).split("|");
+            // Make sure we actually have a command hash to parse
+            if (newhash[0] != '')
+                commands = newhash[0].split(',');
+            if (newhash.length == 2)
+                hashBracketCode = newhash[1];
+        } else {
+            hashBracketCode = hash;
+        }
+        
+        // First, process commands...
+        // Commands:
+        //   d|debug - enable debugging
+        //   r|results - compare (or populate) with results
+        //               (NOTE: there is a post-load action for this command)
+        //   
+        if (commands != null) {
+            for (i = 0; i <= commands.length; i++) {
+                cmd = commands[i];
+                
+                if ((cmd == "d") || (cmd == "debug")) {
+                    bracketDebugEnabled = true;
+                    enableBracketDebugging();
+                }
+            }
+        }
+        
+        // Then, load up the bracket code...
+        if (hashBracketCode != null) {
+            bracketDebug("Importing bracket from hash: "+hashBracketCode);
+            showJSModalWindow("Importing bracket via BracketCode™...", "Importing bracket...");
+            loadURLData_HashBracketCode(hashBracketCode)
+        }
+    }
+    initialURLDataLoaded = true;
+}
+
+function loadURLData_HashBracketCode(hashBracketCode) {
+    if (bracketDebugEnabled) {
+        if (!((typeof debugConsoleReady == 'boolean') && (debugConsoleReady))) {
+            setTimeout(function() {
+                loadURLData_HashBracketCode(hashBracketCode);
+            }, 1000);
+            return;
+        }
+    }
+    
+    importPicks(hashBracketCode);
+}
 
 function showBracket() {
     hideJSModalWindow();
@@ -451,7 +551,7 @@ function importBracket() {
 }
 
 function actuallyImportBracket() {
-    textBracketCode = $("#bracketCodeInput").val().replace(/\s+/g, '');;
+    textBracketCode = $("#bracketCodeInput").val().replace(/\s+/g, '');
     showJSModalWindow("Importing bracket via BracketCode™...", "Importing bracket...");
     importPicks(textBracketCode);
 }
@@ -600,7 +700,7 @@ function renderPicks(rPicks) {
                         prevMatchID = slotObj.attr('rel');
                         
                         bracketDebug("round = "+round+", matchObj (i) = "+i+", slot (j) = "+j+", matchSlot = "+matchSlot+", prevMatchID = "+prevMatchID);
-                        bracketDebug(matchObjs);
+                        //bracketDebug(matchObjs);
                         
                         slotSeedObj = $('<span class="seed">');
                         slotSeedObj.html($("#"+prevMatchID+" ."+matchSlot+" .seed").html());
@@ -632,18 +732,16 @@ function renderPicks(rPicks) {
     }
 }
 
-var loadingTimeout; // timeout id is a global variable
-
-jQuery( document ).ready(function( $ ) {
-    initBracket();
+function enableBracketDebugging() {
+    loadingTimeout = window.setTimeout(function() {
+        showJSModalWindow("ERROR: Unable to load debug console! The bracket may not be usable.<br />" +
+            "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "Loading Failed");
+    }, 5000);
     
-    if (bracketDebugEnabled) {
-        loadingTimeout = window.setTimeout(function() {
-            showJSModalWindow("ERROR: Unable to load debug console! The bracket may not be usable.<br />" +
-                "<a href='javascript:hideJSModalWindow()' class='btn btn-default btn-xs'><b>Close</b></a>", "Loading Failed");
-        }, 5000);
-        
-        showJSModalWindow("Loading debugging console...<br />(Debugger has been enabled for this session!)", "Loading...");
+    showJSModalWindow("Loading debugging console...<br />(Debugger has been enabled for this session!)", "Loading...");
+    
+    if (!bracketDebugScriptsLoaded) {
+        bracketDebugScriptsLoaded = true;
         bracketDebug("Debugging enabled, loading dependencies for debug console...");
         $.getScript( "js/debug.js", function() {
             window.clearTimeout(loadingTimeout);
@@ -656,7 +754,33 @@ jQuery( document ).ready(function( $ ) {
                     initDebugConsole();
                     initHookConsoleLog();
                     showDebugConsole();
+                    hideJSModalWindow();
                 }, 1000);
         });
+    } else {
+        bracketDebug("Debugging enabled, relaunching debug console...");
+        setTimeout(function() {
+                    window.clearTimeout(loadingTimeout);
+                    bracketDebug("Starting debug console...");
+                    initDebugConsole();
+                    initHookConsoleLog();
+                    showDebugConsole();
+                    hideJSModalWindow();
+                }, 1000);
     }
+}
+
+var loadingTimeout; // timeout id is a global variable
+
+jQuery( document ).ready(function( $ ) {
+    loadURLData();
+    initBracket();
+    
+    if (bracketDebugEnabled) {
+        enableBracketDebugging();
+    }
+});
+
+$(window).hashchange(function() {
+    loadURLData();
 });
