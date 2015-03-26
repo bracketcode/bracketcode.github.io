@@ -29,7 +29,7 @@ var bracketLoaded = false;
 var bracket = null;
 var picks = null;
 var pickorder = null;
-var bracketDebugEnabled = false;
+var bracketDebugEnabled = true;
 var bracketDebugScriptsLoaded = false;
 
 var initialURLDataLoaded = false;
