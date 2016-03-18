@@ -576,7 +576,6 @@ function testBracketCodeExportImport() {
         arraysEqual(picks.round5, round5) &&
         arraysEqual(picks.round6, round6)) {
         bracketDebug("BracketCode first import validated!");
-        return true;
     } else {
         bracketDebug("ERROR: BracketCode failed first import validation!");
         bracketDebug("Round 1 match: " + arraysEqual(picks.round1, round1));
@@ -615,7 +614,6 @@ function testBracketCodeExportImport() {
         arraysEqual(picks.round5, round5) &&
         arraysEqual(picks.round6, round6)) {
         bracketDebug("BracketCode second import validated!");
-        return true;
     } else {
         bracketDebug("ERROR: BracketCode failed second import validation!");
         bracketDebug("Round 1 match: " + arraysEqual(picks.round1, round1));
@@ -626,6 +624,10 @@ function testBracketCodeExportImport() {
         bracketDebug("Round 6 match: " + arraysEqual(picks.round6, round6));
         return false;
     }
+    
+    bracketDebug("All tests passed!");
+    
+    return true;
 }
 
 function importPicks(code) {
