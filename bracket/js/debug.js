@@ -34,11 +34,11 @@ function initDebugConsole() {
                  if (line == "") return false;
                  else return true;
                },
-               commandHandle:function(line){
+               commandHandle:function(line, report){
                    try { var ret = eval(line);
-                         if (typeof ret != 'undefined') return ret.toString();
-                         else return true; }
-                   catch (e) { return e.toString(); }
+                         if (typeof ret != 'undefined') report(ret.toString());
+                         else report(true); }
+                   catch (e) { report(e.toString()); }
                },
                completeHandle:function(prefix){
                    result = "";
