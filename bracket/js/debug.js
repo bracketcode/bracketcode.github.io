@@ -149,7 +149,7 @@ function initHookConsoleLog() {
             } else {
                 consoleMsg = message;
             }
-            debugConsoleController.commandResult(consoleMsg, "jquery-console-message-value");
+            debugConsoleController.commandMessage(consoleMsg, "jquery-console-message-value");
             if(!(typeof oldConsoleLog === "undefined")) {
                 oldConsoleLog(message);
             }
