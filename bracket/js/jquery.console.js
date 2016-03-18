@@ -161,6 +161,7 @@
       extern.typer = typer;
       extern.scrollToBottom = scrollToBottom;
       extern.report = report;
+      extern.commandResult = commandResult;
     })();
 
     ////////////////////////////////////////////////////////////////////////
