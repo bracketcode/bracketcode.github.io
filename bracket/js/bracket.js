@@ -558,76 +558,84 @@ function actuallyImportBracket() {
 
 function testBracketCodeExportImport() {
     // E3D70FC0-FAEC-77-D-0-1
+    bracketDebug("BracketCode Export/Import Test");
+    bracketDebug("===============================");
+    bracketDebug("This test will run asynchronously - do NOT touch the console!");
+    
     finalBracketCode = bracketCode.encode(picks);
     
-    round1 = picks.round1.slice();
-    round2 = picks.round2.slice();
-    round3 = picks.round3.slice();
-    round4 = picks.round4.slice();
-    round5 = picks.round5.slice();
-    round6 = picks.round6.slice();
+    window.testRound1 = picks.round1.slice();
+    window.testRound2 = picks.round2.slice();
+    window.testRound3 = picks.round3.slice();
+    window.testRound4 = picks.round4.slice();
+    window.testRound5 = picks.round5.slice();
+    window.testRound6 = picks.round6.slice();
     
     importPicks(finalBracketCode);
     
-    if (arraysEqual(picks.round1, round1) &&
-        arraysEqual(picks.round2, round2) &&
-        arraysEqual(picks.round3, round3) &&
-        arraysEqual(picks.round4, round4) &&
-        arraysEqual(picks.round5, round5) &&
-        arraysEqual(picks.round6, round6)) {
-        bracketDebug("BracketCode first import validated!");
-    } else {
-        bracketDebug("ERROR: BracketCode failed first import validation!");
-        bracketDebug("Round 1 match: " + arraysEqual(picks.round1, round1));
-        bracketDebug("Round 2 match: " + arraysEqual(picks.round2, round2));
-        bracketDebug("Round 3 match: " + arraysEqual(picks.round3, round3));
-        bracketDebug("Round 4 match: " + arraysEqual(picks.round4, round4));
-        bracketDebug("Round 5 match: " + arraysEqual(picks.round5, round5));
-        bracketDebug("Round 6 match: " + arraysEqual(picks.round6, round6));
-        return false;
-    }
-    
-    finalBracketCode2 = bracketCode.encode(picks);
-    
-    if (finalBracketCode != finalBracketCode2) {
-        bracketDebug("ERROR: BracketCode failed import layout / export validation!")
-        bracketDebug("Correct BracketCode: " + finalBracketCode);
-        bracketDebug("Wrong BracketCode: " + finalBracketCode2);
-        return false;
-    }
-    
-    bracketDebug("BracketCode import layout / export validated!")
-    
-    round1 = picks.round1.slice();
-    round2 = picks.round2.slice();
-    round3 = picks.round3.slice();
-    round4 = picks.round4.slice();
-    round5 = picks.round5.slice();
-    round6 = picks.round6.slice();
-    
-    importPicks(finalBracketCode2);
-    
-    if (arraysEqual(picks.round1, round1) &&
-        arraysEqual(picks.round2, round2) &&
-        arraysEqual(picks.round3, round3) &&
-        arraysEqual(picks.round4, round4) &&
-        arraysEqual(picks.round5, round5) &&
-        arraysEqual(picks.round6, round6)) {
-        bracketDebug("BracketCode second import validated!");
-    } else {
-        bracketDebug("ERROR: BracketCode failed second import validation!");
-        bracketDebug("Round 1 match: " + arraysEqual(picks.round1, round1));
-        bracketDebug("Round 2 match: " + arraysEqual(picks.round2, round2));
-        bracketDebug("Round 3 match: " + arraysEqual(picks.round3, round3));
-        bracketDebug("Round 4 match: " + arraysEqual(picks.round4, round4));
-        bracketDebug("Round 5 match: " + arraysEqual(picks.round5, round5));
-        bracketDebug("Round 6 match: " + arraysEqual(picks.round6, round6));
-        return false;
-    }
-    
-    bracketDebug("All tests passed!");
-    
-    return true;
+    setTimeout(function() {
+        if (arraysEqual(picks.round1, window.testRound1) &&
+            arraysEqual(picks.round2, window.testRound2) &&
+            arraysEqual(picks.round3, window.testRound3) &&
+            arraysEqual(picks.round4, window.testRound4) &&
+            arraysEqual(picks.round5, window.testRound5) &&
+            arraysEqual(picks.round6, window.testRound6)) {
+            bracketDebug("BracketCode first import validated!");
+        } else {
+            bracketDebug("ERROR: BracketCode failed first import validation!");
+            bracketDebug("Round 1 match: " + arraysEqual(picks.round1, window.testRound1));
+            bracketDebug("Round 2 match: " + arraysEqual(picks.round2, window.testRound2));
+            bracketDebug("Round 3 match: " + arraysEqual(picks.round3, window.testRound3));
+            bracketDebug("Round 4 match: " + arraysEqual(picks.round4, window.testRound4));
+            bracketDebug("Round 5 match: " + arraysEqual(picks.round5, window.testRound5));
+            bracketDebug("Round 6 match: " + arraysEqual(picks.round6, window.testRound6));
+            return false;
+        }
+        
+        finalBracketCode2 = bracketCode.encode(picks);
+        
+        if (finalBracketCode != finalBracketCode2) {
+            bracketDebug("ERROR: BracketCode failed import layout / export validation!")
+            bracketDebug("Correct BracketCode: " + finalBracketCode);
+            bracketDebug("Wrong BracketCode: " + finalBracketCode2);
+            return false;
+        }
+        
+        bracketDebug("BracketCode import layout / export validated!")
+        
+        window.testRound1 = picks.round1.slice();
+        window.testRound2 = picks.round2.slice();
+        window.testRound3 = picks.round3.slice();
+        window.testRound4 = picks.round4.slice();
+        window.testRound5 = picks.round5.slice();
+        window.testRound6 = picks.round6.slice();
+        
+        setTimeout(function() {
+            importPicks(finalBracketCode2);
+            
+            if (arraysEqual(picks.round1, window.testRound1) &&
+                arraysEqual(picks.round2, window.testRound2) &&
+                arraysEqual(picks.round3, window.testRound3) &&
+                arraysEqual(picks.round4, window.testRound4) &&
+                arraysEqual(picks.round5, window.testRound5) &&
+                arraysEqual(picks.round6, window.testRound6)) {
+                bracketDebug("BracketCode second import validated!");
+            } else {
+                bracketDebug("ERROR: BracketCode failed second import validation!");
+                bracketDebug("Round 1 match: " + arraysEqual(picks.round1, window.testRound1));
+                bracketDebug("Round 2 match: " + arraysEqual(picks.round2, window.testRound2));
+                bracketDebug("Round 3 match: " + arraysEqual(picks.round3, window.testRound3));
+                bracketDebug("Round 4 match: " + arraysEqual(picks.round4, window.testRound4));
+                bracketDebug("Round 5 match: " + arraysEqual(picks.round5, window.testRound5));
+                bracketDebug("Round 6 match: " + arraysEqual(picks.round6, window.testRound6));
+                return false;
+            }
+            
+            bracketDebug("All tests passed!");
+            
+            return true;
+        }, 5000);
+    }, 5000);
 }
 
 function importPicks(code) {
