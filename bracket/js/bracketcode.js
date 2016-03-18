@@ -154,16 +154,21 @@ var bracketCode = {
 }
 
 function testBracketCode() {
+    bracketDebug("Validating BracketCode...");
+    
     bcode = bracketCode.encode(picks);
+    bracketDebug("Current BracketCode: "+bcode);
+    
     new_bracket = bracketCode.decode(bcode);
     
-    if (arraysEqual(picks.round1, new_bracket.round1) && \
-        arraysEqual(picks.round2, new_bracket.round2) && \
-        arraysEqual(picks.round3, new_bracket.round3) && \
-        arraysEqual(picks.round4, new_bracket.round4) && \
-        arraysEqual(picks.round5, new_bracket.round5) && \
+    if (arraysEqual(picks.round1, new_bracket.round1) &&
+        arraysEqual(picks.round2, new_bracket.round2) &&
+        arraysEqual(picks.round3, new_bracket.round3) &&
+        arraysEqual(picks.round4, new_bracket.round4) &&
+        arraysEqual(picks.round5, new_bracket.round5) &&
         arraysEqual(picks.round6, new_bracket.round6)) {
         bracketDebug("BracketCode validated!");
+        return true;
     } else {
         bracketDebug("ERROR: BracketCode failed validation!");
         bracketDebug("Round 1 match: " + arraysEqual(picks.round1, new_bracket.round1));
@@ -172,6 +177,7 @@ function testBracketCode() {
         bracketDebug("Round 4 match: " + arraysEqual(picks.round4, new_bracket.round4));
         bracketDebug("Round 5 match: " + arraysEqual(picks.round5, new_bracket.round5));
         bracketDebug("Round 6 match: " + arraysEqual(picks.round6, new_bracket.round6));
+        return false;
     }
 }
 
