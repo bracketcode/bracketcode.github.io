@@ -60,6 +60,21 @@
 * dec2bin('22'); // '10110'
 */
 
+/* enyo @ http://stackoverflow.com/a/16436975 */
+function arraysEqual(a, b) {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length != b.length) return false;
+
+  // If you don't care about the order of the elements inside
+  // the array, you should sort both arrays here.
+
+  for (var i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
+
 var bracketCode = {
     encode: function(bracketObj) {
         bracketCodeStr = ""
@@ -136,6 +151,28 @@ var bracketCode = {
         }
         return done;
     },
+}
+
+function testBracketCode() {
+    bcode = bracketCode.encode(picks);
+    new_bracket = bracketCode.decode(bcode);
+    
+    if (arraysEqual(picks.round1, new_bracket.round1) && \
+        arraysEqual(picks.round2, new_bracket.round2) && \
+        arraysEqual(picks.round3, new_bracket.round3) && \
+        arraysEqual(picks.round4, new_bracket.round4) && \
+        arraysEqual(picks.round5, new_bracket.round5) && \
+        arraysEqual(picks.round6, new_bracket.round6)) {
+        bracketDebug("BracketCode validated!");
+    } else {
+        bracketDebug("ERROR: BracketCode failed validation!");
+        bracketDebug("Round 1 match: " + arraysEqual(picks.round1, new_bracket.round1));
+        bracketDebug("Round 2 match: " + arraysEqual(picks.round2, new_bracket.round2));
+        bracketDebug("Round 3 match: " + arraysEqual(picks.round3, new_bracket.round3));
+        bracketDebug("Round 4 match: " + arraysEqual(picks.round4, new_bracket.round4));
+        bracketDebug("Round 5 match: " + arraysEqual(picks.round5, new_bracket.round5));
+        bracketDebug("Round 6 match: " + arraysEqual(picks.round6, new_bracket.round6));
+    }
 }
 
 var partialBracketCode = {
