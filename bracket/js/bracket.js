@@ -558,6 +558,7 @@ function actuallyImportBracket() {
 
 function testBracketCodeExportImport() {
     // E3D70FC0-FAEC-77-D-0-1
+    // E3D70FC0-CA6C-7F-F-0-0
     bracketDebug("BracketCode Export/Import Test");
     bracketDebug("===============================");
     bracketDebug("This test will run asynchronously - do NOT touch the console!");
@@ -610,9 +611,9 @@ function testBracketCodeExportImport() {
         window.testRound5 = picks.round5.slice();
         window.testRound6 = picks.round6.slice();
         
+        importPicks(finalBracketCode2);
+        
         setTimeout(function() {
-            importPicks(finalBracketCode2);
-            
             if (arraysEqual(picks.round1, window.testRound1) &&
                 arraysEqual(picks.round2, window.testRound2) &&
                 arraysEqual(picks.round3, window.testRound3) &&
