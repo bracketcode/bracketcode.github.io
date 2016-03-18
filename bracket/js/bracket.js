@@ -597,6 +597,8 @@ function testBracketCodeExportImport() {
         return false;
     }
     
+    bracketDebug("BracketCode import layout / export validated!")
+    
     round1 = picks.round1.slice();
     round2 = picks.round2.slice();
     round3 = picks.round3.slice();
