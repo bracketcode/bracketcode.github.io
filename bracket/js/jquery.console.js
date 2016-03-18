@@ -139,7 +139,10 @@
     var acceptInput = true;
     // When this value is true, the command has been canceled
     var cancelCommand = false;
-
+    
+    // When this value is true, there is a command currently executing!
+    var commandRunning = false;
+    
     // External exports object
     var extern = {};
 
@@ -513,6 +516,7 @@
     // Handle a command
     function handleCommand() {
       if (typeof config.commandHandle == 'function') {
+        commandRunning = true;
         disableInput();
         addToHistory(promptText);
         var text = promptText;
@@ -537,6 +541,7 @@
               "jquery-console-message-error"
             );
           }
+          commandRunning = false;
         } else if (typeof ret == "string") {
           commandResult(ret,"jquery-console-message-success");
         } else if (typeof ret == 'object' && ret.length) {
@@ -589,6 +594,7 @@
       } else { // Assume it's a DOM node or jQuery object.
         inner.append(msg);
       }
+      if (!commandRunning) newPromptBox();
     };
 
     ////////////////////////////////////////////////////////////////////////
