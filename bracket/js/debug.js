@@ -36,9 +36,9 @@ function initDebugConsole() {
                },
                commandHandle:function(line, report){
                    try { var ret = eval(line);
-                         if (typeof ret != 'undefined') report(ret.toString(), "jquery-console-message-success");
-                         else report(true, "jquery-console-message-success"); }
-                   catch (e) { report(e.toString(), "jquery-console-message-success"); }
+                         if (typeof ret != 'undefined') return ret.toString();
+                         else return true; }
+                   catch (e) { return e.toString(); }
                },
                completeHandle:function(prefix){
                    result = "";
