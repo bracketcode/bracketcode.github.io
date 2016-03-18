@@ -582,19 +582,22 @@
     };
     
     function commandMessage(msg,className) {
-      column = -1;
-      updatePromptDisplay();
-      if (typeof msg == 'string') {
-        message(msg,className);
-      } else if ($.isArray(msg)) {
-        for (var x in msg) {
-          var ret = msg[x];
-          message(ret.msg,ret.className);
-        }
-      } else { // Assume it's a DOM node or jQuery object.
-        inner.append(msg);
+      if (!commandRunning) {
+          report(msg, className);
+      } else {
+          column = -1;
+          updatePromptDisplay();
+          if (typeof msg == 'string') {
+            message(msg,className);
+          } else if ($.isArray(msg)) {
+            for (var x in msg) {
+              var ret = msg[x];
+              message(ret.msg,ret.className);
+            }
+          } else { // Assume it's a DOM node or jQuery object.
+            inner.append(msg);
+          }
       }
-      if (!commandRunning) newPromptBox();
     };
 
     ////////////////////////////////////////////////////////////////////////
